@@ -1,5 +1,6 @@
 import tkinter
 import tkinter.font as Font
+import tkinter.messagebox as messagebox
 
 mainWindow = tkinter.Tk()
 fontName = 'Times New Roman'
@@ -13,43 +14,39 @@ def SuccessfulLogin():
     print("Successful")
 
 def FailedLogin():
-    failWindow = tkinter.Tk()
-    failWindow.title('Failed login.')
-    failWindow.geometry('300x150+500+300')
-    failText = tkinter.Label(failWindow, text = 'Incorrect username and/or password.', font = loginFont)
-    failText.place(relx = 0.5, rely = 0.3, anchor = 'center')
-    failButton = tkinter.Button(failWindow, text = 'OK', command = lambda:CloseWindow(failWindow), height = 1, width = 10)
-    failButton.place(relx = 0.5, rely = 0.8, anchor = 'center')
+    messagebox.showwarning('Incorrect Login', 'Incorrect Username and/or Password.')
 
 def LoginButton(username, password):
-    print(username + password)
+    print('Username: ' + username + '\nPassword: ' + password)
     FailedLogin()
 
-#Sets the initial window, window size
-mainWindow.title('Login Screen')
-mainWindow.geometry('900x500')
-#Sets the title
-titleText = tkinter.Label(mainWindow, text = "Grading Manager and Database", font = titleFont)
-titleText.place(relx = 0.5, rely = 0.2, anchor = 'center')
+def LoginScreen():
+    #Sets the initial window, window size
+    mainWindow.title('Login Screen')
+    mainWindow.geometry('900x500')
+    mainWindow.resizable(False,False)
+    #Sets the title
+    titleText = tkinter.Label(mainWindow, text = "Grading Manager and Database", font = titleFont)
+    titleText.place(relx = 0.5, rely = 0.2, anchor = 'center')
 
-#Username prompt
-usernameText = tkinter.Label(mainWindow, text = 'Username:', font = loginFont, justify = 'left')
-usernameText.place(relx = 0.2, rely = 0.4, anchor = 'center')
-usernameBox = tkinter.Text(mainWindow, height = 1, width = 30)
-usernameBox.place(relx = 0.5, rely = 0.4, anchor = 'center')
-#Password prompt
-passwordText = tkinter.Label(mainWindow, text = 'Password:', font = loginFont, justify = 'left')
-passwordText.place(relx = 0.2, rely = 0.5, anchor = 'center')
-passwordBox = tkinter.Text(mainWindow, height = 1, width = 30)
-passwordBox.place(relx = 0.5, rely = 0.5, anchor = 'center')
-#Button to submit username and password
+    #Username prompt
+    usernameText = tkinter.Label(mainWindow, text = 'Username:', font = loginFont, justify = 'left')   
+    usernameText.place(relx = 0.2, rely = 0.4, anchor = 'center')
+    usernameBox = tkinter.Entry(mainWindow, width = 50)
+    usernameBox.place(relx = 0.5, rely = 0.4, anchor = 'center')
+    #Password prompt
+    passwordText = tkinter.Label(mainWindow, text = 'Password:', font = loginFont, justify = 'left')
+    passwordText.place(relx = 0.2, rely = 0.5, anchor = 'center')
+    passwordBox = tkinter.Entry(mainWindow, show='*', width = 50)
+    passwordBox.place(relx = 0.5, rely = 0.5, anchor = 'center')
+    #Button to submit username and password
+    loginButton = tkinter.Button(mainWindow, text = 'Login', command = lambda:LoginButton(usernameBox.get(),passwordBox.get()), height = 1, width = 10)
+    loginButton.place(relx = 0.4, rely = 0.6, anchor = 'center')
+    #Button to close the program
+    quitButton = tkinter.Button(mainWindow, text = 'Quit', command = lambda:CloseWindow(mainWindow), height = 1, width = 10)
+    quitButton.place(relx = 0.6, rely = 0.6, anchor = 'center')
+    mainWindow.mainloop()
 
-#Sets login button
-loginButton = tkinter.Button(mainWindow, text = 'Login', command = lambda:LoginButton(usernameBox.get('1.0','end'),passwordBox.get('1.0','end')), height = 1, width = 10)
-loginButton.place(relx = 0.4, rely = 0.6, anchor = 'center')
-
-quitButton = tkinter.Button(mainWindow, text = 'Quit', command = lambda:CloseWindow(mainWindow), height = 1, width = 10)
-quitButton.place(relx = 0.6, rely = 0.6, anchor = 'center')
-mainWindow.mainloop()
+LoginScreen()
 
 
