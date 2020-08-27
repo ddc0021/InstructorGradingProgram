@@ -16,9 +16,12 @@ def SuccessfulLogin():
 def FailedLogin():
     messagebox.showwarning('Incorrect Login', 'Incorrect Username and/or Password.')
 
-def LoginButton(username, password):
+def Login(username, password):
     print('Username: ' + username + '\nPassword: ' + password)
     FailedLogin()
+
+def NewAccount(username, password):
+    FailedLogin() #placeholder
 
 def LoginScreen():
     #Sets the initial window, window size
@@ -40,8 +43,11 @@ def LoginScreen():
     passwordBox = tkinter.Entry(mainWindow, show='*', width = 50)
     passwordBox.place(relx = 0.5, rely = 0.5, anchor = 'center')
     #Button to submit username and password
-    loginButton = tkinter.Button(mainWindow, text = 'Login', command = lambda:LoginButton(usernameBox.get(),passwordBox.get()), height = 1, width = 10)
+    loginButton = tkinter.Button(mainWindow, text = 'Login', command = lambda:Login(usernameBox.get(),passwordBox.get()), height = 1, width = 10)
     loginButton.place(relx = 0.4, rely = 0.6, anchor = 'center')
+    #Button to create a new account
+    createAccountButton = tkinter.Button(mainWindow, text = 'New Account', command = lambda:NewAccount(usernameBox.get(), passwordBox.get()), height = 1, width = 10)
+    createAccountButton.place(relx = 0.5, rely = 0.7, anchor = 'center')
     #Button to close the program
     quitButton = tkinter.Button(mainWindow, text = 'Quit', command = lambda:CloseWindow(mainWindow), height = 1, width = 10)
     quitButton.place(relx = 0.6, rely = 0.6, anchor = 'center')
