@@ -1,6 +1,7 @@
 import tkinter
 import tkinter.font as Font
 import tkinter.messagebox as messagebox
+
 class MainMenu:
     #Closes the current window
     def CloseWindow(self, window):
